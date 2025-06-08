@@ -1,0 +1,17 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+You are an expert Java backend developer using Spring Boot. Generate a full Java CRUD REST API for managing users based on the JSONPlaceholder user model (https://jsonplaceholder.typicode.com/guide/).
+
+Requirements:
+- Java 23
+- Spring Boot (latest LTS)
+- Maven
+- PostgreSQL
+- Liquibase for DB migration
+- Use Docker and Docker Compose to containerize the app and DB.
+
+
+Generate code step-by-step with explanations and create required classes, configuration files, and Liquibase changelogs.

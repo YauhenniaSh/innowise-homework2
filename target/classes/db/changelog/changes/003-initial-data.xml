@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.20.xsd">
+
+    <changeSet id="003" author="system">
+        <!-- Sample Geo Data -->
+        <insert tableName="geo">
+            <column name="id" value="1"/>
+            <column name="lat" value="-37.3159"/>
+            <column name="lng" value="81.1496"/>
+        </insert>
+
+        <!-- Sample Address Data -->
+        <insert tableName="address">
+            <column name="id" value="1"/>
+            <column name="street" value="Kulas Light"/>
+            <column name="suite" value="Apt. 556"/>
+            <column name="city" value="Gwenborough"/>
+            <column name="zipcode" value="92998-3874"/>
+            <column name="geo_id" value="1"/>
+        </insert>
+
+        <!-- Sample Company Data -->
+        <insert tableName="company">
+            <column name="id" value="1"/>
+            <column name="name" value="Romaguera-Crona"/>
+            <column name="catch_phrase" value="Multi-layered client-server neural-net"/>
+            <column name="bs" value="harness real-time e-markets"/>
+        </insert>
+
+        <!-- Sample User Data -->
+        <insert tableName="users">
+            <column name="id" value="1"/>
+            <column name="name" value="Leanne Graham"/>
+            <column name="username" value="Bret"/>
+            <column name="email" value="Sincere@april.biz"/>
+            <column name="phone" value="1-770-736-8031 x56442"/>
+            <column name="website" value="hildegard.org"/>
+            <column name="address_id" value="1"/>
+            <column name="company_id" value="1"/>
+        </insert>
+
+        <!-- Sample Auth Data (password: password123) -->
+        <insert tableName="auth">
+            <column name="id" value="1"/>
+            <column name="email" value="Sincere@april.biz"/>
+            <column name="password_hash" value="$2a$10$rS5oXEGBnumCk7VZU1.vGOJuI.Ld9YyE3jVtgP1VIvvUOL4Csqw8e"/>
+            <column name="user_id" value="1"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog> 

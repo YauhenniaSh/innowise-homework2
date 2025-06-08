@@ -1,0 +1,45 @@
+# Ignore Maven build files
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+pom.xml.bak
+
+.vscode
+
+# Ignore IDE configuration files
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+
+# Ignore OS-generated files
+.DS_Store
+Thumbs.db
+
+# Ignore logs and temporary files
+logs/
+*.log
+hs_err_pid*
+*.pid
+
+# Ignore dependency directories
+node_modules/
+*.class
+
+# Ignore database files
+*.h2.db
+*.mv.db
+v
+spring-boot-devtools.jar
+spring.log
+
+# Ignore test coverage files
+.coverage/
+.jacoco/
+
+
+# Ignore Spring Boot-specific files
+.en
