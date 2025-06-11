@@ -1,12 +1,12 @@
 package com.example.usermanagement.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@Data
+@Getter
+@Setter
+@ToString(exclude = {"address", "company"})
+@EqualsAndHashCode(of = "id")
 @Entity
 @Builder
 @NoArgsConstructor
