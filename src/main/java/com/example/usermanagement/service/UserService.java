@@ -6,6 +6,7 @@ import com.example.usermanagement.dto.GeoDto;
 import com.example.usermanagement.dto.UserDto;
 import com.example.usermanagement.model.User;
 import com.example.usermanagement.repository.UserRepository;
+import com.example.usermanagement.repository.AuthRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,6 +18,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class UserService {
     private final UserRepository userRepository;
+    private final AuthRepository authRepository;
 
     public List<UserDto> getAllUsers() {
         return userRepository.findAll().stream()
@@ -65,10 +67,14 @@ public class UserService {
 
     @Transactional
     public void deleteUser(Long id) {
-        if (!userRepository.existsById(id)) {
-            throw new RuntimeException("User not found with id: " + id);
-        }
-        userRepository.deleteById(id);
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not found with id: " + id));
+        
+        // Delete the auth record first
+        authRepository.deleteByUserId(id);
+        
+        // Then delete the user
+        userRepository.delete(user);
     }
 
     public UserDto mapToDto(User user) {
