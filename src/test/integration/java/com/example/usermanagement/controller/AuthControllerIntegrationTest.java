@@ -1,7 +1,6 @@
 package com.example.usermanagement.controller;
 
-import com.example.usermanagement.dto.LoginRequest;
-import com.example.usermanagement.dto.RegisterRequest;
+import com.example.usermanagement.dto.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
