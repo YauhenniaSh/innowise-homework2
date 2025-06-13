@@ -29,7 +29,7 @@ class AuthControllerUnitTest {
     @Test
     void testRegister() {
         RegisterRequest request = new RegisterRequest();
-        AuthResponse response = new AuthResponse("token");
+        AuthResponse response = new AuthResponse("token", null);
         when(authService.register(request)).thenReturn(response);
 
         ResponseEntity<AuthResponse> result = authController.register(request);
@@ -41,7 +41,7 @@ class AuthControllerUnitTest {
     @Test
     void testLogin() {
         LoginRequest request = new LoginRequest();
-        AuthResponse response = new AuthResponse("token");
+        AuthResponse response = new AuthResponse("token", null);
         when(authService.login(request)).thenReturn(response);
 
         ResponseEntity<AuthResponse> result = authController.login(request);
