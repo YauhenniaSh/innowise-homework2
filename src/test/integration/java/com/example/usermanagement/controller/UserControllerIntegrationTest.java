@@ -109,17 +109,12 @@ class UserControllerIntegrationTest {
 
     @Test
     void testDeleteUser() throws Exception {
-        // First delete the auth record
-        mockMvc.perform(delete("/api/auth/logout")
-                .header("Authorization", "Bearer " + jwtToken))
-                .andExpect(status().isOk());
-
-        // Then delete the user
+        // First delete the user
         mockMvc.perform(delete("/api/users/" + testUserDto.getId())
                 .header("Authorization", "Bearer " + jwtToken))
                 .andExpect(status().isNoContent());
 
-        // Verify user is deleted
+                // Verify user is deleted
         mockMvc.perform(get("/api/users/" + testUserDto.getId())
                 .header("Authorization", "Bearer " + jwtToken))
                 .andExpect(status().isInternalServerError());

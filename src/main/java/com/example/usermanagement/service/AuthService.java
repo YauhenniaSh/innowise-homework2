@@ -88,6 +88,13 @@ public class AuthService {
                 .build();
     }
 
+    @Transactional
+    public void logout(String email) {
+        Auth auth = authRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User not found with email: " + email));
+        authRepository.delete(auth);
+    }
+
     private Address mapAddress(RegisterRequest request) {
         if (request.getAddress() == null) {
             return null;
