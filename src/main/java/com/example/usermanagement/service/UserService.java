@@ -73,6 +73,14 @@ public class UserService {
         // Delete the auth record first
         authRepository.deleteByUserId(id);
         
+        // Delete related records
+        if (user.getAddress() != null) {
+            user.getAddress().setGeo(null); // Break the relationship with Geo
+        }
+        if (user.getCompany() != null) {
+            user.setCompany(null); // Break the relationship with Company
+        }
+        
         // Then delete the user
         userRepository.delete(user);
     }

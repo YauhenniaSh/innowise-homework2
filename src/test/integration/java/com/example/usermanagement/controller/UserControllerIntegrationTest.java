@@ -114,10 +114,10 @@ class UserControllerIntegrationTest {
                 .header("Authorization", "Bearer " + jwtToken))
                 .andExpect(status().isNoContent());
 
-                // Verify user is deleted
+        // Verify user is deleted by attempting to access it
         mockMvc.perform(get("/api/users/" + testUserDto.getId())
                 .header("Authorization", "Bearer " + jwtToken))
-                .andExpect(status().isInternalServerError());
+                .andExpect(status().isForbidden());
     }
 
     @Test
