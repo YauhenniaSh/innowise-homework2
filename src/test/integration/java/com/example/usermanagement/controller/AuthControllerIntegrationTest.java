@@ -32,7 +32,28 @@ class AuthControllerIntegrationTest {
         request.setPassword("TestPassword123!");
         request.setPhone("123-456-7890");
         request.setWebsite("https://example.com");
-        // Set address and company if required
+
+        // AddressDto and GeoDto
+        GeoDto geoDto = GeoDto.builder()
+            .lat("40.7128")
+            .lng("-74.0060")
+            .build();
+        AddressDto addressDto = AddressDto.builder()
+            .street("123 Main St")
+            .suite("Apt 1")
+            .city("Testville")
+            .zipcode("12345")
+            .geo(geoDto)
+            .build();
+        request.setAddress(addressDto);
+
+        // CompanyDto
+        CompanyDto companyDto = CompanyDto.builder()
+            .name("TestCorp")
+            .catchPhrase("Innovate your world")
+            .bs("synergy")
+            .build();
+        request.setCompany(companyDto);
 
         mockMvc.perform(post("/api/auth/register")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -43,13 +64,52 @@ class AuthControllerIntegrationTest {
 
     @Test
     void testLogin() throws Exception {
-        LoginRequest request = new LoginRequest();
-        request.setEmail("integration@test.com"); // Use a valid email from DB or register first
-        request.setPassword("TestPassword123!");
+        // 1. Register the user first
+        RegisterRequest registerRequest = new RegisterRequest();
+        registerRequest.setName("Integration Test");
+        registerRequest.setUsername("integrationuser" + System.currentTimeMillis());
+        String email = "integration" + System.currentTimeMillis() + "@test.com";
+        registerRequest.setEmail(email);
+        registerRequest.setPassword("TestPassword123!");
+        registerRequest.setPhone("123-456-7890");
+        registerRequest.setWebsite("https://example.com");
+
+        // AddressDto and GeoDto
+        GeoDto geoDto = GeoDto.builder()
+            .lat("40.7128")
+            .lng("-74.0060")
+            .build();
+        AddressDto addressDto = AddressDto.builder()
+            .street("123 Main St")
+            .suite("Apt 1")
+            .city("Testville")
+            .zipcode("12345")
+            .geo(geoDto)
+            .build();
+        registerRequest.setAddress(addressDto);
+
+        // CompanyDto
+        CompanyDto companyDto = CompanyDto.builder()
+            .name("TestCorp")
+            .catchPhrase("Innovate your world")
+            .bs("synergy")
+            .build();
+        registerRequest.setCompany(companyDto);
+
+        mockMvc.perform(post("/api/auth/register")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(registerRequest)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.token").exists());
+
+        // 2. Now login with the same credentials
+        LoginRequest loginRequest = new LoginRequest();
+        loginRequest.setEmail(email);
+        loginRequest.setPassword("TestPassword123!");
 
         mockMvc.perform(post("/api/auth/login")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(request)))
+                .content(objectMapper.writeValueAsString(loginRequest)))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.token").exists());
     }
